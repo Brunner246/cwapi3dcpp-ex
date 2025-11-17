@@ -1,0 +1,7 @@
+{
+  "name": "cwapi3dcpp-ex",
+  "version-string": "0.1.0",
+  "description": "Extension library for CwAPI3D providing geometry and composite object structures",
+  "homepage": "https://github.com/Brunner246/cwapi3dcpp-ex",
+  "license": "MIT"
+}
