@@ -92,8 +92,6 @@ jobs:
 
       - name: Setup vcpkg
         uses: lukka/run-vcpkg@v11.5
-        with:
-          vcpkgGitCommitId: 'latest'
 
       - name: Build with vcpkg
         run: |
