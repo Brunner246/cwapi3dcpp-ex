@@ -132,6 +132,7 @@ TEST(CompositeTest, TraversalCountAll) {
     
     int count = 0;
     root->traverse([&count](const Component& comp) {
+        std::ignore = comp;
         ++count;
     });
     EXPECT_EQ(count, 3); // Root + 2 children
