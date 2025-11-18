@@ -1,4 +1,7 @@
 #include <gtest/gtest.h>
+
+#include <numbers>
+
 #include "cwapi3d/geometry/BoundingBox.h"
 #include "cwapi3d/geometry/CoordinateFrame3D.h"
 
@@ -123,7 +126,7 @@ TEST(OBBTest, FromAABBWithCustomFrame) {
     const AABB aabb(Point3D(0.0, 0.0, 0.0), Point3D(10.0, 10.0, 10.0));
     
     // Create a rotated frame (45 degrees around Z axis)
-    const double angle = M_PI / 4.0;
+    constexpr double angle = std::numbers::pi / 4.0;
     const Vec3D xAxis(std::cos(angle), std::sin(angle), 0.0);
     const Vec3D yAxis(-std::sin(angle), std::cos(angle), 0.0);
     const Vec3D zAxis(0.0, 0.0, 1.0);
@@ -210,7 +213,7 @@ TEST(OBBTest, ContainsPoint) {
 
 TEST(OBBTest, ContainsPointRotated) {
     // Create OBB rotated 45 degrees around Z axis
-    const double angle = M_PI / 4.0;
+    constexpr double angle = std::numbers::pi / 4.0;
     const Vec3D xAxis(std::cos(angle), std::sin(angle), 0.0);
     const Vec3D yAxis(-std::sin(angle), std::cos(angle), 0.0);
     const Vec3D zAxis(0.0, 0.0, 1.0);
@@ -310,7 +313,7 @@ TEST(OBBTest, ToAABB) {
 
 TEST(OBBTest, ToAABBRotated) {
     // Create OBB rotated 45 degrees around Z axis
-    const double angle = M_PI / 4.0;
+    constexpr double angle = std::numbers::pi / 4.0;
     const Vec3D xAxis(std::cos(angle), std::sin(angle), 0.0);
     const Vec3D yAxis(-std::sin(angle), std::cos(angle), 0.0);
     const Vec3D zAxis(0.0, 0.0, 1.0);
