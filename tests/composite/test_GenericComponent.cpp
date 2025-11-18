@@ -7,7 +7,7 @@ using namespace cwapi3d::composite;
 // ===== Generic Component Tests with int =====
 
 TEST(GenericComponentTest, LeafCreation) {
-    auto leaf = std::make_unique<LeafNode<int>>("TestLeaf", 42);
+    const auto leaf = std::make_unique<LeafNode<int>>("TestLeaf", 42);
     
     EXPECT_EQ(leaf->name(), "TestLeaf");
     EXPECT_TRUE(leaf->hasData());
@@ -17,15 +17,15 @@ TEST(GenericComponentTest, LeafCreation) {
 }
 
 TEST(GenericComponentTest, LeafWithoutData) {
-    auto leaf = std::make_unique<LeafNode<int>>("TestLeaf");
+    const auto leaf = std::make_unique<LeafNode<int>>("TestLeaf");
     
     EXPECT_EQ(leaf->name(), "TestLeaf");
     EXPECT_FALSE(leaf->hasData());
-    EXPECT_THROW(leaf->data(), std::runtime_error);
+    EXPECT_THROW(std::ignore = leaf->data(), std::runtime_error);
 }
 
 TEST(GenericComponentTest, CompositeCreation) {
-    auto composite = std::make_unique<CompositeNode<int>>("TestComposite");
+    const auto composite = std::make_unique<CompositeNode<int>>("TestComposite");
     
     EXPECT_EQ(composite->name(), "TestComposite");
     EXPECT_TRUE(composite->isComposite());
@@ -33,9 +33,9 @@ TEST(GenericComponentTest, CompositeCreation) {
 }
 
 TEST(GenericComponentTest, AddChild) {
-    auto composite = std::make_unique<CompositeNode<int>>("Parent");
+    const auto composite = std::make_unique<CompositeNode<int>>("Parent");
     auto leaf = std::make_unique<LeafNode<int>>("Child", 10);
-    auto* leafPtr = leaf.get();
+    const auto* leafPtr = leaf.get();
     
     composite->addChild(std::move(leaf));
     
@@ -44,7 +44,7 @@ TEST(GenericComponentTest, AddChild) {
 }
 
 TEST(GenericComponentTest, AddMultipleChildren) {
-    auto composite = std::make_unique<CompositeNode<int>>("Parent");
+    const auto composite = std::make_unique<CompositeNode<int>>("Parent");
     
     composite->addChild(std::make_unique<LeafNode<int>>("Child1", 1));
     composite->addChild(std::make_unique<LeafNode<int>>("Child2", 2));
@@ -54,7 +54,7 @@ TEST(GenericComponentTest, AddMultipleChildren) {
 }
 
 TEST(GenericComponentTest, GetChild) {
-    auto composite = std::make_unique<CompositeNode<int>>("Parent");
+    const auto composite = std::make_unique<CompositeNode<int>>("Parent");
     
     composite->addChild(std::make_unique<LeafNode<int>>("Child1", 1));
     composite->addChild(std::make_unique<LeafNode<int>>("Child2", 2));
@@ -72,12 +72,12 @@ TEST(GenericComponentTest, GetChildOutOfRange) {
     auto composite = std::make_unique<CompositeNode<int>>("Parent");
     composite->addChild(std::make_unique<LeafNode<int>>("Child1", 1));
     
-    EXPECT_THROW(composite->getChild(1), std::out_of_range);
-    EXPECT_THROW(composite->getChild(100), std::out_of_range);
+    EXPECT_THROW(std::ignore =composite->getChild(1), std::out_of_range);
+    EXPECT_THROW(std::ignore =composite->getChild(100), std::out_of_range);
 }
 
 TEST(GenericComponentTest, FindChild) {
-    auto composite = std::make_unique<CompositeNode<int>>("Parent");
+    const auto composite = std::make_unique<CompositeNode<int>>("Parent");
     
     composite->addChild(std::make_unique<LeafNode<int>>("Child1", 1));
     composite->addChild(std::make_unique<LeafNode<int>>("Child2", 2));
@@ -91,15 +91,15 @@ TEST(GenericComponentTest, FindChild) {
 }
 
 TEST(GenericComponentTest, RemoveChildByPointer) {
-    auto composite = std::make_unique<CompositeNode<int>>("Parent");
+    const auto composite = std::make_unique<CompositeNode<int>>("Parent");
     
     auto leaf = std::make_unique<LeafNode<int>>("Child", 42);
     auto* leafPtr = leaf.get();
     composite->addChild(std::move(leaf));
     
     EXPECT_EQ(composite->childCount(), 1);
-    
-    auto removed = composite->removeChild(leafPtr);
+
+    const auto removed = composite->removeChild(leafPtr);
     
     EXPECT_EQ(composite->childCount(), 0);
     EXPECT_NE(removed, nullptr);
@@ -108,12 +108,12 @@ TEST(GenericComponentTest, RemoveChildByPointer) {
 }
 
 TEST(GenericComponentTest, RemoveChildByName) {
-    auto composite = std::make_unique<CompositeNode<int>>("Parent");
+    const auto composite = std::make_unique<CompositeNode<int>>("Parent");
     
     composite->addChild(std::make_unique<LeafNode<int>>("Child1", 1));
     composite->addChild(std::make_unique<LeafNode<int>>("Child2", 2));
-    
-    auto removed = composite->removeChild("Child1");
+
+    const auto removed = composite->removeChild("Child1");
     
     EXPECT_EQ(composite->childCount(), 1);
     EXPECT_NE(removed, nullptr);
@@ -121,7 +121,7 @@ TEST(GenericComponentTest, RemoveChildByName) {
 }
 
 TEST(GenericComponentTest, ClearChildren) {
-    auto composite = std::make_unique<CompositeNode<int>>("Parent");
+    const auto composite = std::make_unique<CompositeNode<int>>("Parent");
     
     composite->addChild(std::make_unique<LeafNode<int>>("Child1", 1));
     composite->addChild(std::make_unique<LeafNode<int>>("Child2", 2));
@@ -135,7 +135,7 @@ TEST(GenericComponentTest, ClearChildren) {
 }
 
 TEST(GenericComponentTest, Iteration) {
-    auto composite = std::make_unique<CompositeNode<int>>("Parent");
+    const auto composite = std::make_unique<CompositeNode<int>>("Parent");
     
     composite->addChild(std::make_unique<LeafNode<int>>("Child1", 10));
     composite->addChild(std::make_unique<LeafNode<int>>("Child2", 20));
@@ -152,7 +152,7 @@ TEST(GenericComponentTest, Iteration) {
 }
 
 TEST(GenericComponentTest, TraversalMutable) {
-    auto root = std::make_unique<CompositeNode<int>>("Root");
+    const auto root = std::make_unique<CompositeNode<int>>("Root");
     
     auto composite1 = std::make_unique<CompositeNode<int>>("Composite1");
     composite1->addChild(std::make_unique<LeafNode<int>>("Leaf1", 1));
@@ -162,7 +162,7 @@ TEST(GenericComponentTest, TraversalMutable) {
     root->addChild(std::make_unique<LeafNode<int>>("Leaf3", 3));
     
     int count = 0;
-    root->traverse([&count](ComponentBase<int>& comp) {
+    root->traverse([&count]([[maybe_unused]] ComponentBase<int>& comp) {
         count++;
     });
     
@@ -170,7 +170,7 @@ TEST(GenericComponentTest, TraversalMutable) {
 }
 
 TEST(GenericComponentTest, TraversalConst) {
-    auto root = std::make_unique<CompositeNode<int>>("Root");
+    const auto root = std::make_unique<CompositeNode<int>>("Root");
     
     auto composite1 = std::make_unique<CompositeNode<int>>("Composite1");
     composite1->addChild(std::make_unique<LeafNode<int>>("Leaf1", 1));
@@ -189,7 +189,7 @@ TEST(GenericComponentTest, TraversalConst) {
 }
 
 TEST(GenericComponentTest, DataModification) {
-    auto leaf = std::make_unique<LeafNode<int>>("TestLeaf", 10);
+    const auto leaf = std::make_unique<LeafNode<int>>("TestLeaf", 10);
     
     EXPECT_EQ(leaf->data(), 10);
     
@@ -201,18 +201,18 @@ TEST(GenericComponentTest, DataModification) {
 }
 
 TEST(GenericComponentTest, DataClear) {
-    auto leaf = std::make_unique<LeafNode<int>>("TestLeaf", 42);
+    const auto leaf = std::make_unique<LeafNode<int>>("TestLeaf", 42);
     
     EXPECT_TRUE(leaf->hasData());
     
     leaf->clearData();
     
     EXPECT_FALSE(leaf->hasData());
-    EXPECT_THROW(leaf->data(), std::runtime_error);
+    EXPECT_THROW(std::ignore =leaf->data(), std::runtime_error);
 }
 
 TEST(GenericComponentTest, NameModification) {
-    auto leaf = std::make_unique<LeafNode<int>>("OldName", 42);
+    const auto leaf = std::make_unique<LeafNode<int>>("OldName", 42);
     
     EXPECT_EQ(leaf->name(), "OldName");
     
@@ -222,21 +222,22 @@ TEST(GenericComponentTest, NameModification) {
 }
 
 TEST(GenericComponentTest, PreventSelfAsChild) {
-    auto composite = std::make_unique<CompositeNode<int>>("Test");
+    const auto composite = std::make_unique<CompositeNode<int>>("Test");
     
     // Cannot add a component to itself - this would require moving,
     // which is not possible, but we can test the check
-    EXPECT_THROW({
-        auto ptr = composite.get();
+    EXPECT_THROW(
+        {
+            const auto ptr = composite.get();
         // This is contrived but tests the check
         auto fake = std::unique_ptr<ComponentBase<int>>(ptr);
         composite->addChild(std::move(fake));
-        fake.release(); // Prevent double delete
+        std::ignore =fake.release(); // Prevent double delete
     }, std::invalid_argument);
 }
 
 TEST(GenericComponentTest, PreventNullChild) {
-    auto composite = std::make_unique<CompositeNode<int>>("Test");
+    const auto composite = std::make_unique<CompositeNode<int>>("Test");
     
     EXPECT_THROW(composite->addChild(nullptr), std::invalid_argument);
 }
@@ -244,7 +245,7 @@ TEST(GenericComponentTest, PreventNullChild) {
 // ===== Tests with different data types =====
 
 TEST(GenericComponentTest, StringDataType) {
-    auto leaf = std::make_unique<LeafNode<std::string>>("StringLeaf", "Hello, World!");
+    const auto leaf = std::make_unique<LeafNode<std::string>>("StringLeaf", "Hello, World!");
     
     EXPECT_EQ(leaf->data(), "Hello, World!");
     
@@ -253,7 +254,7 @@ TEST(GenericComponentTest, StringDataType) {
 }
 
 TEST(GenericComponentTest, DoubleDataType) {
-    auto composite = std::make_unique<CompositeNode<double>>("DoubleComposite");
+    const auto composite = std::make_unique<CompositeNode<double>>("DoubleComposite");
     
     composite->addChild(std::make_unique<LeafNode<double>>("Value1", 3.14));
     composite->addChild(std::make_unique<LeafNode<double>>("Value2", 2.71));
@@ -279,12 +280,12 @@ struct CustomData {
 
 TEST(GenericComponentTest, CustomStructDataType) {
     CustomData data{42, "TestData"};
-    auto leaf = std::make_unique<LeafNode<CustomData>>("CustomLeaf", data);
+    const auto leaf = std::make_unique<LeafNode<CustomData>>("CustomLeaf", data);
     
     EXPECT_EQ(leaf->data().id, 42);
     EXPECT_EQ(leaf->data().name, "TestData");
-    
-    CustomData newData{100, "NewData"};
+
+    const CustomData newData{100, "NewData"};
     leaf->setData(newData);
     
     EXPECT_EQ(leaf->data(), newData);
@@ -293,15 +294,15 @@ TEST(GenericComponentTest, CustomStructDataType) {
 // ===== Visitor Tests =====
 
 TEST(GenericComponentTest, PrintVisitor) {
-    auto root = std::make_unique<CompositeNode<int>>("Root", 0);
+    const auto root = std::make_unique<CompositeNode<int>>("Root", 0);
     root->addChild(std::make_unique<LeafNode<int>>("Leaf1", 10));
     root->addChild(std::make_unique<LeafNode<int>>("Leaf2", 20));
     
     std::ostringstream oss;
-    PrintVisitorBase<int> printer(oss);
+    const PrintVisitorBase<int> printer(oss);
     root->accept(printer);
-    
-    std::string output = oss.str();
+
+    const std::string output = oss.str();
     EXPECT_TRUE(output.find("Root") != std::string::npos);
     EXPECT_TRUE(output.find("Leaf1") != std::string::npos);
     EXPECT_TRUE(output.find("Leaf2") != std::string::npos);

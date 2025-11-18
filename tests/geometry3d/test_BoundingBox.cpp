@@ -138,7 +138,7 @@ TEST(OBBTest, FromAABBWithCustomFrame) {
 }
 
 TEST(OBBTest, FromPoints) {
-    std::vector<Point3D> points = {
+    const std::vector<Point3D> points = {
         Point3D(0.0, 0.0, 0.0),
         Point3D(10.0, 0.0, 0.0),
         Point3D(0.0, 10.0, 0.0),
@@ -251,7 +251,7 @@ TEST(OBBTest, IntersectsAABB) {
 }
 
 TEST(OBBTest, ExpandWithPoint) {
-    Vec3D halfExtents(1.0, 1.0, 1.0);
+    const Vec3D halfExtents(1.0, 1.0, 1.0);
     OBB obb(CoordinateFrame3D::worldFrame(), halfExtents);
     
     obb.expand(Point3D(5.0, 0.0, 0.0));
@@ -262,12 +262,12 @@ TEST(OBBTest, ExpandWithPoint) {
 }
 
 TEST(OBBTest, ExpandWithOBB) {
-    Vec3D halfExtents1(1.0, 1.0, 1.0);
+    const Vec3D halfExtents1(1.0, 1.0, 1.0);
     OBB obb1(CoordinateFrame3D::worldFrame(), halfExtents1);
     
     CoordinateFrame3D frame2;
     frame2.setOrigin(Point3D(5.0, 0.0, 0.0));
-    Vec3D halfExtents2(1.0, 1.0, 1.0);
+    const Vec3D halfExtents2(1.0, 1.0, 1.0);
     const OBB obb2(frame2, halfExtents2);
     
     obb1.expand(obb2);
@@ -280,12 +280,12 @@ TEST(OBBTest, ExpandWithOBB) {
 }
 
 TEST(OBBTest, MergedOBB) {
-    Vec3D halfExtents1(1.0, 1.0, 1.0);
+    const Vec3D halfExtents1(1.0, 1.0, 1.0);
     const OBB obb1(CoordinateFrame3D::worldFrame(), halfExtents1);
     
     CoordinateFrame3D frame2;
     frame2.setOrigin(Point3D(5.0, 0.0, 0.0));
-    Vec3D halfExtents2(1.0, 1.0, 1.0);
+    const Vec3D halfExtents2(1.0, 1.0, 1.0);
     const OBB obb2(frame2, halfExtents2);
     
     const OBB merged = obb1.merged(obb2);
@@ -346,7 +346,7 @@ TEST(OBBTest, OrientedToElementFrame) {
     const CoordinateFrame3D elementFrame = CoordinateFrame3D::fromOriginAndZ(elementOrigin, elementZAxis);
     
     // Create points in world space
-    std::vector<Point3D> worldPoints = {
+    const std::vector<Point3D> worldPoints = {
         Point3D(8.0, 18.0, 29.0),
         Point3D(12.0, 22.0, 31.0),
         Point3D(9.0, 19.0, 29.5),

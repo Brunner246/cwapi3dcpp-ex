@@ -25,31 +25,11 @@ jobs:
 #            config: "Release"
 #            cc: "gcc-11"
 #            cxx: "g++-11"
-#          - name: "Ubuntu Clang"
-#            os: ubuntu-latest
-#            generator: "Unix Makefiles"
-#            config: "Release"
-#            cc: "clang-14"
-#            cxx: "clang++-14"
-#          - name: "macOS"
-#            os: macos-latest
-#            generator: "Unix Makefiles"
-#            config: "Release"
+
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v5.0.0
-
-#      - name: Set up environment (Linux)
-#        if: runner.os == 'Linux'
-#        run: |
-#          sudo apt-get update
-#          sudo apt-get install -y cmake ninja-build
-#
-#      - name: Set up environment (macOS)
-#        if: runner.os == 'macOS'
-#        run: |
-#          brew install cmake ninja
 
       - name: Configure CMake
         run: |

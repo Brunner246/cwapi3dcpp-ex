@@ -37,10 +37,10 @@ int main() {
     KDTree<int> tree;
     tree.build(points);
 
-    Point3D queryPoint(50.0, 50.0, 50.0);
+    const Point3D queryPoint(50.0, 50.0, 50.0);
     printPoint("Query point", queryPoint);
 
-    auto nearest = tree.findNearest(queryPoint);
+    const auto nearest = tree.findNearest(queryPoint);
     printPoint("Nearest point", nearest.first);
     std::cout << "ID: " << nearest.second << "\n";
     std::cout << "Distance: " << queryPoint.distanceTo(nearest.first) << "\n\n";
@@ -49,8 +49,8 @@ int main() {
     std::cout << "2. KDTree Radius Search\n";
     std::cout << "-----------------------\n";
 
-    double radius = 10.0;
-    auto inRadius = tree.findInRadius(queryPoint, radius);
+    const double radius = 10.0;
+    const auto inRadius = tree.findInRadius(queryPoint, radius);
 
     std::cout << "Found " << inRadius.size() << " points within radius " << radius << "\n";
     if (!inRadius.empty()) {
@@ -66,8 +66,8 @@ int main() {
     std::cout << "3. KDTree K-Nearest Neighbors\n";
     std::cout << "------------------------------\n";
 
-    size_t k = 5;
-    auto kNearest = tree.findKNearest(queryPoint, k);
+    const size_t k = 5;
+    const auto kNearest = tree.findKNearest(queryPoint, k);
 
     std::cout << "Found " << kNearest.size() << " nearest neighbors:\n";
     for (size_t i = 0; i < kNearest.size(); ++i) {

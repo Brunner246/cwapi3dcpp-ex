@@ -23,7 +23,7 @@ void example_element_structure() {
     std::cout << "\n=== Example 1: Element Structure Hierarchy ===\n\n";
     
     // Create a building structure using ElementData
-    auto building = std::make_unique<CompositeNode<ElementData>>("Building");
+    const auto building = std::make_unique<CompositeNode<ElementData>>("Building");
     building->setData({1000, "Building", 0.0});
     
     // Add floors
@@ -61,7 +61,7 @@ void example_element_structure() {
     building->addChild(std::move(floor2));
     
     // Print the structure
-    PrintVisitorBase<ElementData> printer;
+    const PrintVisitorBase<ElementData> printer;
     building->accept(printer);
     
     // Traverse and count elements
@@ -80,7 +80,7 @@ void example_element_ids() {
     std::cout << "\n=== Example 2: Element ID Hierarchy ===\n\n";
     
     // Create a hierarchy using just element IDs (uint64_t)
-    auto project = std::make_unique<CompositeNode<uint64_t>>("Project", 1000);
+    const auto project = std::make_unique<CompositeNode<uint64_t>>("Project", 1000);
     
     auto zone1 = std::make_unique<CompositeNode<uint64_t>>("Zone A", 2000);
     zone1->addChild(std::make_unique<LeafNode<uint64_t>>("Element 1", 3001));
@@ -95,7 +95,7 @@ void example_element_ids() {
     project->addChild(std::move(zone2));
     
     // Print the structure
-    PrintVisitorBase<uint64_t> printer;
+    const PrintVisitorBase<uint64_t> printer;
     project->accept(printer);
     
     // Collect all element IDs
@@ -118,7 +118,7 @@ void example_string_hierarchy() {
     std::cout << "\n=== Example 3: String-based Hierarchy ===\n\n";
     
     // Create a category hierarchy using strings
-    auto root = std::make_unique<CompositeNode<std::string>>("Root", "/");
+    const auto root = std::make_unique<CompositeNode<std::string>>("Root", "/");
     
     auto structural = std::make_unique<CompositeNode<std::string>>("Structural", 
         "/structural");
@@ -140,7 +140,7 @@ void example_string_hierarchy() {
     root->addChild(std::move(architectural));
     
     // Print the structure
-    PrintVisitorBase<std::string> printer;
+    const PrintVisitorBase<std::string> printer;
     root->accept(printer);
 }
 
@@ -172,8 +172,8 @@ private:
 
 void example_custom_visitor() {
     std::cout << "\n=== Example 4: Custom Visitor for Statistics ===\n\n";
-    
-    auto root = std::make_unique<CompositeNode<int>>("Root", 1);
+
+    const auto root = std::make_unique<CompositeNode<int>>("Root", 1);
     
     auto group1 = std::make_unique<CompositeNode<int>>("Group 1", 10);
     group1->addChild(std::make_unique<LeafNode<int>>("Item 1", 100));
@@ -186,8 +186,8 @@ void example_custom_visitor() {
     
     root->addChild(std::move(group1));
     root->addChild(std::move(group2));
-    
-    CountingVisitor<int> counter;
+
+    const CountingVisitor<int> counter;
     root->accept(counter);
     
     std::cout << "Statistics:\n";
@@ -199,15 +199,15 @@ void example_custom_visitor() {
 // Example 5: Modifying data through traversal
 void example_data_modification() {
     std::cout << "\n=== Example 5: Modifying Data Through Traversal ===\n\n";
-    
-    auto root = std::make_unique<CompositeNode<double>>("Measurements", 0.0);
+
+    const auto root = std::make_unique<CompositeNode<double>>("Measurements", 0.0);
     
     root->addChild(std::make_unique<LeafNode<double>>("Value 1", 10.5));
     root->addChild(std::make_unique<LeafNode<double>>("Value 2", 20.3));
     root->addChild(std::make_unique<LeafNode<double>>("Value 3", 15.7));
     
     std::cout << "Original values:\n";
-    PrintVisitorBase<double> printer;
+    const PrintVisitorBase<double> printer;
     root->accept(printer);
     
     // Multiply all values by 2
