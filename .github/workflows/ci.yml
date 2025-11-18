@@ -31,9 +31,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v5.0.0
 
+      - name: Setup vcpkg
+        uses: lukka/run-vcpkg@v11.5
+        with:
+          vcpkgGitCommitId: 'd1ff36c6520ee43f1a656c03cd6425c2974a449e'
+
       - name: Configure CMake
         run: |
-          cmake -B build -G "${{ matrix.config.generator }}" -DCMAKE_BUILD_TYPE=${{ matrix.config.config }} -DBUILD_TESTING=ON -DBUILD_EXAMPLES=ON
+          cmake -B build -G "${{ matrix.config.generator }}" -DCMAKE_BUILD_TYPE=${{ matrix.config.config }} -DBUILD_TESTING=ON -DBUILD_EXAMPLES=ON -DCMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake
         env:
           CC: ${{ matrix.config.cc }}
           CXX: ${{ matrix.config.cxx }}
@@ -63,20 +68,20 @@ jobs:
 #          find geometry3d composite -name '*.h' -o -name '*.cpp' | xargs clang-format-14 --dry-run --Werror
 
 
-  vcpkg-build:
-    name: vcpkg Build Test
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v5.0.0
-
-      - name: Setup vcpkg
-        uses: lukka/run-vcpkg@v11.5
-        with:
-          vcpkgGitCommitId: 'd1ff36c6520ee43f1a656c03cd6425c2974a449e'
-
-      - name: Build with vcpkg
-        run: |
-          cmake -B build -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake -DBUILD_TESTING=ON -DBUILD_EXAMPLES=ON
-          cmake --build build
+#  vcpkg-build:
+#    name: vcpkg Build Test
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - name: Checkout code
+#        uses: actions/checkout@v5.0.0
+#
+#      - name: Setup vcpkg
+#        uses: lukka/run-vcpkg@v11.5
+#        with:
+#          vcpkgGitCommitId: 'd1ff36c6520ee43f1a656c03cd6425c2974a449e'
+#
+#      - name: Build with vcpkg
+#        run: |
+#          cmake -B build -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake -DBUILD_TESTING=ON -DBUILD_EXAMPLES=ON
+#          cmake --build build
