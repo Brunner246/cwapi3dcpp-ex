@@ -25,8 +25,8 @@ TEST(CompositeTest, AddChildrenCount) {
     auto child1 = std::make_unique<Leaf>("Child1");
     auto child2 = std::make_unique<Leaf>("Child2");
 
-    Component* child1Ptr = child1.get();
-    Component* child2Ptr = child2.get();
+    // Component* child1Ptr = child1.get();
+    // Component* child2Ptr = child2.get();
 
     root->addChild(std::move(child1));
     root->addChild(std::move(child2));
@@ -121,7 +121,7 @@ TEST(CompositeTest, HierarchyNestedComposite) {
     root->addChild(std::move(floor1));
     root->addChild(std::move(floor2));
 
-    const Composite* floor1Comp = static_cast<Composite*>(root->getChild(0));
+    const Composite* floor1Comp = dynamic_cast<Composite*>(root->getChild(0));
     EXPECT_EQ(floor1Comp->childCount(), 2);
 }
 
@@ -189,6 +189,7 @@ TEST(CompositeTest, Iteration) {
     
     int count = 0;
     for (const auto& child : *root) {
+        std::ignore = child;
         ++count;
     }
     EXPECT_EQ(count, 3);
