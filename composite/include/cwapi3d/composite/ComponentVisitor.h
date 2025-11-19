@@ -1,6 +1,6 @@
 #pragma once
 
-#include <cwapi3d/composite/composite_export.h>
+#include "cwapi3d/composite/Component.h"
 #include <iostream>
 
 // Forward declare to avoid circular dependency in this section
@@ -79,40 +79,8 @@ private:
     mutable int mIndent;
 };
 
-/**
- * @brief Visitor interface for traversing the component hierarchy
- */
-class COMPOSITE_EXPORT ComponentVisitor {
-   public:
-    virtual ~ComponentVisitor() = default;
-
-    virtual void visitComposite(const Composite& composite) const = 0;
-    virtual void visitLeaf(const Leaf& leaf) const = 0;
-};
-
-/**
- * @brief Helper visitor for printing the component hierarchy
- */
-class COMPOSITE_EXPORT PrintVisitor final : public ComponentVisitor {
-   public:
-    explicit PrintVisitor(std::ostream& os = std::cout) : mOs(os), mIndent(0) {}
-
-    void visitComposite(const Composite& composite) const override;
-    void visitLeaf(const Leaf& leaf) const override;
-
-   private:
-    std::ostream& mOs;
-    int mIndent;
-};
-
 }  // namespace cwapi3d::composite
 
-// ============================================================================
-// Template Method Implementations
-// Must include Component.h to get full class definitions
-// ============================================================================
-
-#include "cwapi3d/composite/Component.h"
 
 namespace cwapi3d::composite {
 

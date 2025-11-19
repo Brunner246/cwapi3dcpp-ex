@@ -1,8 +1,8 @@
 add_executable(geometry_example geometry_example.cpp)
 target_link_libraries(geometry_example PRIVATE geometry3d)
 
-add_executable(composite_example composite_example.cpp)
-target_link_libraries(composite_example PRIVATE composite)
+#add_executable(composite_example composite_example.cpp)
+#target_link_libraries(composite_example PRIVATE composite)
 
 add_executable(generic_composite_example generic_composite_example.cpp)
 target_link_libraries(generic_composite_example PRIVATE composite)

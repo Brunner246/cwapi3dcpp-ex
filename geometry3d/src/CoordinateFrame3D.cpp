@@ -34,8 +34,7 @@ void CoordinateFrame3D::orthonormalize() {
     const double dotYZ = mY.dot(mZ);
     mY = mY - mZ * dotYZ;
     mY.normalize();
-    
-    // X axis is cross product of Y and Z
+
     mX = mY.cross(mZ);
     mX.normalize();
 }

@@ -6,7 +6,6 @@ add_library(geometry3d
     src/BoundingBox.cpp
 )
 
-# Generate export header for Windows DLL support
 include(GenerateExportHeader)
 generate_export_header(geometry3d
     BASE_NAME GEOMETRY3D
@@ -22,7 +21,7 @@ target_include_directories(geometry3d
 
 target_compile_features(geometry3d PUBLIC cxx_std_20)
 
-# Set library properties
+
 set_target_properties(geometry3d PROPERTIES
     VERSION ${PROJECT_VERSION}
     SOVERSION ${PROJECT_VERSION_MAJOR}

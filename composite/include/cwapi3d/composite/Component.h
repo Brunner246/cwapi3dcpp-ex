@@ -1,7 +1,5 @@
 #pragma once
 
-#include <cwapi3d/composite/composite_export.h>
-
 #include <algorithm>
 #include <functional>
 #include <memory>
@@ -12,13 +10,8 @@
 
 namespace cwapi3d::composite {
 
-// Forward declarations for generic types
 template <typename T>
 class ComponentVisitorBase;
-
-// ============================================================================
-// Generic Template-based Component System
-// ============================================================================
 
 /**
  * @brief Abstract base class for all components in the generic composite pattern
@@ -49,19 +42,13 @@ class ComponentBase {
         }
         return mData.value();
     }
-    [[nodiscard]] T& data() {
-        if (!mData.has_value()) {
-            throw std::runtime_error("Component has no data");
-        }
-        return mData.value();
-    }
+
     void setData(T data) { mData = std::move(data); }
     void clearData() { mData.reset(); }
 
     [[nodiscard]] ComponentBase* parent() const noexcept { return mParent; }
     void setParent(ComponentBase* parent) noexcept { mParent = parent; }
 
-    // Visitor support
     virtual void accept(const class ComponentVisitorBase<T>& visitor) const = 0;
 
    private:
@@ -69,6 +56,11 @@ class ComponentBase {
     std::optional<T> mData;
     ComponentBase* mParent = nullptr;
 };
+
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable : 4251)  // Suppress DLL interface warnings for STL members
+#endif
 
 /**
  * @brief Composite node that can contain child components
@@ -93,7 +85,7 @@ class CompositeNode final : public ComponentBase<T> {
             throw std::invalid_argument("Cannot add component as its own child");
         }
 
-        // Check if child is an ancestor (would create cycle)
+        // ancestor (would create cycle)
         const ComponentBase<T>* ancestor = this->parent();
         while (ancestor) {
             if (ancestor == child.get()) {
@@ -166,9 +158,8 @@ class CompositeNode final : public ComponentBase<T> {
         return it != mChildren.end() ? it->get() : nullptr;
     }
 
-    // Iteration support
-    using Iterator = typename std::vector<std::unique_ptr<ComponentBase<T>>>::iterator;
-    using ConstIterator = typename std::vector<std::unique_ptr<ComponentBase<T>>>::const_iterator;
+    using Iterator = std::vector<std::unique_ptr<ComponentBase<T>>>::iterator;
+    using ConstIterator = std::vector<std::unique_ptr<ComponentBase<T>>>::const_iterator;
 
     [[nodiscard]] Iterator begin() noexcept { return mChildren.begin(); }
     [[nodiscard]] Iterator end() noexcept { return mChildren.end(); }
@@ -177,7 +168,6 @@ class CompositeNode final : public ComponentBase<T> {
     [[nodiscard]] ConstIterator cbegin() const noexcept { return mChildren.cbegin(); }
     [[nodiscard]] ConstIterator cend() const noexcept { return mChildren.cend(); }
 
-    // Traversal
     void traverse(const std::function<void(ComponentBase<T>&)>& func) {
         func(*this);
         for (auto& child : mChildren) {
@@ -219,93 +209,6 @@ class LeafNode final : public ComponentBase<T> {
     ~LeafNode() override = default;
 
     void accept(const ComponentVisitorBase<T>& visitor) const override;
-};
-
-// ============================================================================
-//
-// ============================================================================
-
-#ifdef _MSC_VER
-#pragma warning(push)
-#pragma warning(disable : 4251)  // Suppress DLL interface warnings for STL members
-#endif
-
-/**
- * @brief Abstract base class for all components in the composite pattern
- */
-class COMPOSITE_EXPORT Component {
-   public:
-    explicit Component(std::string name) : mName(std::move(name)) {}
-    virtual ~Component() = default;
-
-    Component(const Component&) = delete;
-    Component& operator=(const Component&) = delete;
-    Component(Component&&) = default;
-    Component& operator=(Component&&) = default;
-
-    [[nodiscard]] virtual bool isComposite() const noexcept { return false; }
-    [[nodiscard]] const std::string& name() const noexcept { return mName; }
-    void setName(std::string name) { mName = std::move(name); }
-
-    virtual void accept(const class ComponentVisitor& visitor) const = 0;
-
-    [[nodiscard]] Component* parent() const noexcept { return mParent; }
-
-    void setParent(Component* parent) noexcept { mParent = parent; }
-
-   private:
-    std::string mName;
-    Component* mParent = nullptr;
-};
-
-/**
- * @brief Composite node that can contain child components
- */
-class COMPOSITE_EXPORT Composite final : public Component {
-   public:
-    explicit Composite(std::string name) : Component(std::move(name)) {}
-    ~Composite() override = default;
-
-    [[nodiscard]] bool isComposite() const noexcept override { return true; }
-
-    void addChild(std::unique_ptr<Component>&& child);
-    std::unique_ptr<Component> removeChild(Component* child);
-    std::unique_ptr<Component> removeChild(const std::string& name);
-    void clearChildren();
-
-    [[nodiscard]] size_t childCount() const noexcept { return mChildren.size(); }
-    [[nodiscard]] Component* getChild(size_t index) const;
-    [[nodiscard]] Component* findChild(const std::string& name) const;
-
-    // Iteration support
-    using Iterator = std::vector<std::unique_ptr<Component>>::iterator;
-    using ConstIterator = std::vector<std::unique_ptr<Component>>::const_iterator;
-
-    [[nodiscard]] Iterator begin() noexcept { return mChildren.begin(); }
-    [[nodiscard]] Iterator end() noexcept { return mChildren.end(); }
-    [[nodiscard]] ConstIterator begin() const noexcept { return mChildren.begin(); }
-    [[nodiscard]] ConstIterator end() const noexcept { return mChildren.end(); }
-    [[nodiscard]] ConstIterator cbegin() const noexcept { return mChildren.cbegin(); }
-    [[nodiscard]] ConstIterator cend() const noexcept { return mChildren.cend(); }
-
-    // Traversal
-    void traverse(const std::function<void(Component&)>& func);
-    void traverse(const std::function<void(const Component&)>& func) const;
-
-    void accept(const ComponentVisitor& visitor) const override;
-
-   private:
-    std::vector<std::unique_ptr<Component>> mChildren;
-};
-
-/**
- * @brief Leaf component (cannot have children)
- */
-class COMPOSITE_EXPORT Leaf final : public Component {
-   public:
-    explicit Leaf(std::string name) : Component(std::move(name)) {}
-    ~Leaf() override = default;
-    void accept(const ComponentVisitor& visitor) const override;
 };
 
 #ifdef _MSC_VER

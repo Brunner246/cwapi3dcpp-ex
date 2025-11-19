@@ -19,13 +19,13 @@ include(FetchContent)
 
 FetchContent_Declare(
         CwAPI3DEx
-        GIT_REPOSITORY https://github.com/Brunner246/cwapi3dcpp.ex.git
+        GIT_REPOSITORY https://github.com/Brunner246/cwapi3dcpp-ex.git
         GIT_TAG main  # or a specific tag/commit
 )
 
 # Optional: Configure cwapi3dcpp.ex options before making it available
-set(BUILD_TESTING OFF CACHE BOOL "" FORCE)  # Don't build cwapi3dcpp.ex tests
-set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)  # Don't build cwapi3dcpp.ex examples
+set(BUILD_TESTING OFF CACHE BOOL "" FORCE)  # Don't build cwapi3dcpp-ex tests
+set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)  # Don't build cwapi3dcpp-ex examples
 
 FetchContent_MakeAvailable(CwAPI3DEx)
 
@@ -44,7 +44,7 @@ target_link_libraries(my_app PRIVATE
 ```cmake
 FetchContent_Declare(
         CwAPI3DEx
-        GIT_REPOSITORY https://github.com/Brunner246/cwapi3dcpp.ex.git
+        GIT_REPOSITORY https://github.com/Brunner246/cwapi3dcpp-ex.git
         GIT_TAG v0.1.0  # Specific release tag
 )
 ```
@@ -54,7 +54,7 @@ FetchContent_Declare(
 ```cmake
 FetchContent_Declare(
         CwAPI3DEx
-        GIT_REPOSITORY https://github.com/Brunner246/cwapi3dcpp.ex.git
+        GIT_REPOSITORY https://github.com/Brunner246/cwapi3dcpp-ex.git
         GIT_TAG abc123def456  # Specific commit hash
 )
 ```
@@ -64,7 +64,7 @@ FetchContent_Declare(
 ```cmake
 FetchContent_Declare(
         CwAPI3DEx
-        GIT_REPOSITORY https://github.com/Brunner246/cwapi3dcpp.ex.git
+        GIT_REPOSITORY https://github.com/Brunner246/cwapi3dcpp-ex.git
         GIT_TAG develop  # Track a specific branch
 )
 ```
@@ -83,7 +83,7 @@ set(BUILD_EXAMPLES OFF CACHE BOOL "Skip examples" FORCE)
 
 FetchContent_Declare(
         CwAPI3DEx
-        GIT_REPOSITORY https://github.com/Brunner246/cwapi3dcpp.ex.git
+        GIT_REPOSITORY https://github.com/Brunner246/cwapi3dcpp-ex.git
         GIT_TAG main
         GIT_SHALLOW TRUE  # Shallow clone for faster download
 )
@@ -98,7 +98,7 @@ include(FetchContent)
 
 FetchContent_Declare(
         CwAPI3DEx
-        GIT_REPOSITORY https://github.com/Brunner246/cwapi3dcpp.ex.git
+        GIT_REPOSITORY https://github.com/Brunner246/cwapi3dcpp-ex.git
         GIT_TAG main
 )
 
@@ -131,7 +131,7 @@ include(FetchContent)
 # Fetch cwapi3dcpp.ex
 FetchContent_Declare(
         CwAPI3DEx
-        GIT_REPOSITORY https://github.com/Brunner246/cwapi3dcpp.ex.git
+        GIT_REPOSITORY https://github.com/Brunner246/cwapi3dcpp-ex.git
         GIT_TAG v0.1.0
         GIT_SHALLOW TRUE
 )
@@ -204,7 +204,7 @@ include(FetchContent)
 
 FetchContent_Declare(
         CwAPI3DEx
-        GIT_REPOSITORY https://github.com/Brunner246/cwapi3dcpp.ex.git
+        GIT_REPOSITORY https://github.com/Brunner246/cwapi3dcpp-ex.git
         GIT_TAG main
 )
 
@@ -228,14 +228,6 @@ target_link_libraries(my_app PRIVATE geometry3d composite)
 }
 ```
 
-## Advantages of FetchContent
-
-1. **No Manual Installation**: Users don't need to manually clone, build, and install cwapi3dcpp.ex
-2. **Version Control**: Pin to specific commits, tags, or branches
-3. **Reproducible Builds**: Everyone gets the same version automatically
-4. **CI/CD Friendly**: Works seamlessly in automated build pipelines
-5. **Cross-Platform**: Works on Windows, Linux, and macOS without changes
-
 ## Troubleshooting
 
 ### Issue: Slow downloads
@@ -245,7 +237,7 @@ target_link_libraries(my_app PRIVATE geometry3d composite)
 ```cmake
 FetchContent_Declare(
         CwAPI3DEx
-        GIT_REPOSITORY https://github.com/Brunner246/cwapi3dcpp.ex.git
+        GIT_REPOSITORY https://github.com/Brunner246/cwapi3dcpp-ex.git
         GIT_TAG main
         GIT_SHALLOW TRUE
 )
@@ -278,14 +270,6 @@ target_link_libraries(my_app PRIVATE
         CwAPI3D::composite
 )
 ```
-
-## Recommendations
-
-1. **Use Git Tags**: For production code, always use specific version tags rather than branch names
-2. **Disable Tests/Examples**: Set `BUILD_TESTING` and `BUILD_EXAMPLES` to `OFF` to speed up configuration
-3. **Shallow Clones**: Use `GIT_SHALLOW TRUE` for faster downloads
-4. **CMake Version**: Ensure you're using CMake 3.20 or higher
-5. **Lock Versions**: Use `GIT_TAG` with commit hashes for fully reproducible builds
 
 ## License
 

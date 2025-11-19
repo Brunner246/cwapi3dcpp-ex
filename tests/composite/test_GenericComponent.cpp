@@ -194,8 +194,7 @@ TEST(GenericComponentTest, DataModification) {
 
     leaf->setData(20);
     EXPECT_EQ(leaf->data(), 20);
-
-    leaf->data() = 30;
+    leaf->setData(30);
     EXPECT_EQ(leaf->data(), 30);
 }
 

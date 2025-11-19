@@ -1,5 +1,0 @@
-# AABB.h - Fixed include guard naming
-geometry3d/include/cwapi3d/geometry/BoundingBox.h:1: #pragma once used instead of include guards
-
-# Using AABB as an alias to avoid confusion
-# Consider renaming to AxisAlignedBoundingBox if needed for clarity

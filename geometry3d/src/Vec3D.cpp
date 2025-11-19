@@ -5,7 +5,7 @@
 
 namespace cwapi3d::geometry {
 
-constexpr double EPSILON = std::numeric_limits<double>::epsilon() * 100;
+constexpr double EPSILON =  1e-6; // std::numeric_limits<double>::epsilon() * 100;
 
 bool Vec3D::operator==(const Vec3D& other) const noexcept {
     return std::abs(mComponents[0] - other.mComponents[0]) < EPSILON &&

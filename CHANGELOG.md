@@ -12,14 +12,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Geometry3D module with Point3D, Vec3D, Plane3D, CoordinateFrame3D
 - Bounding box support (AABB and oriented)
 - KDTree implementation for nearest neighbor searches
-- SpatialIndex (Octree) for efficient spatial queries
 - Composite pattern implementation for hierarchical object structures
 - Visitor pattern support for component traversal
 - Comprehensive unit tests
-- Example applications
 - vcpkg support
 - GitHub CI/CD workflows
-- Cross-platform support (Windows, Linux, macOS)
 
 ## [0.1.0] - 2025-11-14
 

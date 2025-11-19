@@ -1,7 +1,6 @@
 find_package(GTest CONFIG REQUIRED)
 
 add_executable(composite_tests
-    test_Component.cpp
     test_GenericComponent.cpp
 )
 
