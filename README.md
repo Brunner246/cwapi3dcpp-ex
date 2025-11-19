@@ -1,8 +1,9 @@
 # CwAPI3D.Ex
 
-[//]: # ([![CI]&#40;https://github.com/cwapi3d/cwapi3d-ex/workflows/CI/badge.svg&#41;]&#40;https://github.com/cwapi3d/cwapi3d-ex/actions&#41;)
-
-[//]: # ([![License: MIT]&#40;https://img.shields.io/badge/License-MIT-yellow.svg&#41;]&#40;https://opensource.org/licenses/MIT&#41;)
+[![CI](https://github.com/Brunner246/cwapi3dcpp-ex/actions/workflows/ci.yml/badge.svg)](https://github.com/Brunner246/cwapi3dcpp-ex/actions/workflows/ci.yml)
+[![Issues](https://img.shields.io/github/issues/cwapi3d/cwapi3dcpp)](https://github.com/Brunner246/cwapi3dcpp-ex/issues)
+[![Pulls](https://img.shields.io/github/issues-pr/cwapi3d/cwapi3dcpp)](https://github.com/Brunner246/cwapi3dcpp-ex/pulls)
+[![GitHub](https://img.shields.io/github/license/Brunner246/cwapi3dcpp-ex)](https://choosealicense.com/licenses/mit/)
 
 Extension library for [CwAPI3D](https://github.com/cwapi3d/cwapi3dcpp) providing advanced 3D geometry utilities and composite object structures.
 
