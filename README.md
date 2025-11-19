@@ -1,7 +1,6 @@
 # CwAPI3D.Ex
 
 [![CI](https://github.com/Brunner246/cwapi3dcpp-ex/actions/workflows/ci.yml/badge.svg)](https://github.com/Brunner246/cwapi3dcpp-ex/actions/workflows/ci.yml)
-[![Pulls](https://img.shields.io/github/issues-pr/Brunner246/cwapi3dcpp-ex)](https://github.com/Brunner246/cwapi3dcpp-ex/pulls)
 
 Extension library for [CwAPI3D](https://github.com/cwapi3d/cwapi3dcpp) providing advanced 3D geometry utilities and composite object structures.
 
