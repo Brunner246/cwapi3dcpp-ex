@@ -3,7 +3,7 @@
 #include <cmath>
 #include <stdexcept>
 
-namespace cwapi3d::geometry {
+namespace CwAPI3D::Geometry {
 
 Plane3D::Plane3D() noexcept : mOrigin(0.0, 0.0, 0.0), mNormal(0.0, 0.0, 1.0) {}
 
@@ -45,4 +45,4 @@ Plane3D Plane3D::xzPlane() noexcept { return {Point3D(0.0, 0.0, 0.0), Vec3D::uni
 
 Plane3D Plane3D::yzPlane() noexcept { return {Point3D(0.0, 0.0, 0.0), Vec3D::unitX()}; }
 
-}  // namespace cwapi3d::geometry
+}  // namespace CwAPI3D::Geometry

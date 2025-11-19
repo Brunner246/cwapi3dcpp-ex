@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <limits>
 
-namespace cwapi3d::geometry {
+namespace CwAPI3D::Geometry {
 
 // AABB Implementation
 
@@ -316,4 +316,4 @@ double OBB::projectOntoAxis(const Vec3D& axis) const noexcept {
            mHalfExtents.z() * std::abs(mFrame.zAxis().dot(axis));
 }
 
-}  // namespace cwapi3d::geometry
+}  // namespace CwAPI3D::Geometry

@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include "cwapi3d/geometry/CoordinateFrame3D.h"
 
-using namespace cwapi3d::geometry;
+using namespace CwAPI3D::Geometry;
 
 TEST(CoordinateFrame3DTest, DefaultConstructor) {
     const CoordinateFrame3D frame;

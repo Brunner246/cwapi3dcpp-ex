@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include "cwapi3d/geometry/KDTree.h"
 
-using namespace cwapi3d::geometry;
+using namespace CwAPI3D::Geometry;
 
 TEST(KDTreeTest, EmptyTree) {
     const KDTree<int> tree;

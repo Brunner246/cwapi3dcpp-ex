@@ -8,7 +8,7 @@
 #include "Point3D.h"
 #include "Vec3D.h"
 
-namespace cwapi3d::geometry {
+namespace CwAPI3D::Geometry {
 
 /**
  * @brief Axis-Aligned Bounding Box
@@ -116,4 +116,4 @@ class GEOMETRY3D_EXPORT OBB {
     [[nodiscard]] double projectOntoAxis(const Vec3D& axis) const noexcept;
 };
 
-}  // namespace cwapi3d::geometry
+}  // namespace CwAPI3D::Geometry

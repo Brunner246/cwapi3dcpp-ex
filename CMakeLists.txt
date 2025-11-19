@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.20)
 
 project(cwapi3dcpp-ex
-    VERSION 0.1.0
+    VERSION 0.2.0
     DESCRIPTION "Extension library for CwAPI3D providing geometry and composite object structures"
     LANGUAGES CXX
 )

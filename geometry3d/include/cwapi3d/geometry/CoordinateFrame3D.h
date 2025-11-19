@@ -5,7 +5,7 @@
 #include "Vec3D.h"
 #include <array>
 
-namespace cwapi3d::geometry {
+namespace CwAPI3D::Geometry {
 
 /**
  * @brief Represents a 3D coordinate frame with origin and three orthonormal axes
@@ -41,4 +41,4 @@ private:
     void orthonormalize();
 };
 
-} // namespace cwapi3d::geometry
+} // namespace CwAPI3D::Geometry

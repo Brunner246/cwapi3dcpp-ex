@@ -5,7 +5,7 @@
 #include <queue>
 #include <stdexcept>
 
-namespace cwapi3d::geometry {
+namespace CwAPI3D::Geometry {
 
 template<typename T>
 void KDTree<T>::build(const std::vector<std::pair<Point3D, T>>& points) {

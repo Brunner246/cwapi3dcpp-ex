@@ -4,7 +4,7 @@
 #include <cmath>
 #include <array>
 
-namespace cwapi3d::geometry {
+namespace CwAPI3D::Geometry {
 
 /**
  * @brief Represents a point in 3D space
@@ -51,4 +51,4 @@ private:
 
 [[nodiscard]] Point3D operator*(double scalar, const Point3D& point) noexcept;
 
-} // namespace cwapi3d::geometry
+} // namespace CwAPI3D::Geometry

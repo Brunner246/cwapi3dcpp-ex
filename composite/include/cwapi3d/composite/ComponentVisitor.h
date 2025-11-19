@@ -4,13 +4,13 @@
 #include <iostream>
 
 // Forward declare to avoid circular dependency in this section
-namespace cwapi3d::composite {
+namespace CwAPI3D::Composite {
 template<typename T> class ComponentBase;
 template<typename T> class CompositeNode;
 template<typename T> class LeafNode;
 }
 
-namespace cwapi3d::composite {
+namespace CwAPI3D::Composite {
 
 // Forward declarations for non-generic types
 class Component;
@@ -79,10 +79,10 @@ private:
     mutable int mIndent;
 };
 
-}  // namespace cwapi3d::composite
+}  // namespace CwAPI3D::Composite
 
 
-namespace cwapi3d::composite {
+namespace CwAPI3D::Composite {
 
 // Accept method implementations for template classes
 template<typename T>
@@ -95,4 +95,4 @@ void LeafNode<T>::accept(const ComponentVisitorBase<T>& visitor) const {
     visitor.visitLeaf(*this);
 }
 
-}  // namespace cwapi3d::composite
+}  // namespace CwAPI3D::Composite

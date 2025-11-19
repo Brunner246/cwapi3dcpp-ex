@@ -21,6 +21,8 @@ target_include_directories(geometry3d
 
 target_compile_features(geometry3d PUBLIC cxx_std_20)
 
+# Create alias for FetchContent usage
+add_library(CwAPI3D::geometry3d ALIAS geometry3d)
 
 set_target_properties(geometry3d PROPERTIES
     VERSION ${PROJECT_VERSION}

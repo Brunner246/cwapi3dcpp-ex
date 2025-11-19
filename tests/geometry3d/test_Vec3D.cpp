@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include "cwapi3d/geometry/Vec3D.h"
 
-using namespace cwapi3d::geometry;
+using namespace CwAPI3D::Geometry;
 
 TEST(Vec3DTest, DefaultConstructor) {
     const Vec3D v;

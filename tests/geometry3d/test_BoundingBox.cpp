@@ -5,7 +5,7 @@
 #include "cwapi3d/geometry/BoundingBox.h"
 #include "cwapi3d/geometry/CoordinateFrame3D.h"
 
-using namespace cwapi3d::geometry;
+using namespace CwAPI3D::Geometry;
 
 // ===== AABB Tests =====
 

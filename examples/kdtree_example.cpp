@@ -7,7 +7,7 @@
 
 #include "cwapi3d/geometry/BoundingBox.h"
 
-using namespace cwapi3d::geometry;
+using namespace CwAPI3D::Geometry;
 
 void printPoint(const std::string& label, const Point3D& p) {
     std::cout << label << ": (" << std::fixed << std::setprecision(2) << p.x() << ", " << p.y()

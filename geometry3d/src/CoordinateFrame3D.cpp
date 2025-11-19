@@ -1,7 +1,7 @@
 #include "cwapi3d/geometry/CoordinateFrame3D.h"
 #include <stdexcept>
 
-namespace cwapi3d::geometry {
+namespace CwAPI3D::Geometry {
 
 CoordinateFrame3D::CoordinateFrame3D() noexcept
     : mOrigin(0.0, 0.0, 0.0)
@@ -82,4 +82,4 @@ CoordinateFrame3D CoordinateFrame3D::fromOriginAndZ(const Point3D& origin, const
     return {origin, x, y, z};
 }
 
-} // namespace cwapi3d::geometry
+} // namespace CwAPI3D::Geometry

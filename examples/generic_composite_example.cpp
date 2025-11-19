@@ -5,7 +5,7 @@
 #include <string>
 #include <cstdint>
 
-using namespace cwapi3d::composite;
+using namespace CwAPI3D::Composite;
 
 // Example 1: Element structure representation
 struct ElementData {

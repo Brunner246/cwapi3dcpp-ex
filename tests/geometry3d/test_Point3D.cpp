@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include "cwapi3d/geometry/Point3D.h"
 
-using namespace cwapi3d::geometry;
+using namespace CwAPI3D::Geometry;
 
 TEST(Point3DTest, DefaultConstructor) {
     const Point3D p;

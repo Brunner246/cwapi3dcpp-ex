@@ -6,7 +6,7 @@
 #include <iostream>
 #include <iomanip>
 
-using namespace cwapi3d::geometry;
+using namespace CwAPI3D::Geometry;
 
 void printPoint(const std::string& label, const Point3D& p) {
     std::cout << label << ": (" << std::fixed << std::setprecision(2)

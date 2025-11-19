@@ -3,7 +3,7 @@
 #include <limits>
 #include <stdexcept>
 
-namespace cwapi3d::geometry {
+namespace CwAPI3D::Geometry {
 
 constexpr double EPSILON =  1e-6; // std::numeric_limits<double>::epsilon() * 100;
 
@@ -123,4 +123,4 @@ Vec3D operator*(const double scalar, const Vec3D& vec) noexcept {
     return vec * scalar;
 }
 
-} // namespace cwapi3d::geometry
+} // namespace CwAPI3D::Geometry

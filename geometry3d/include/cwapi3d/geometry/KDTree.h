@@ -6,7 +6,7 @@
 #include <functional>
 #include <limits>
 
-namespace cwapi3d::geometry {
+namespace CwAPI3D::Geometry {
 
 /**
  * @brief KD-Tree for efficient 3D spatial queries
@@ -72,7 +72,7 @@ private:
         std::vector<std::pair<Point3D, T>>& results) const;
 };
 
-} // namespace cwapi3d::geometry
+} // namespace CwAPI3D::Geometry
 
 // Template implementation
 #include "KDTree.inl"

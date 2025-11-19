@@ -3,7 +3,7 @@
 #include "cwapi3d/composite/Component.h"
 #include "cwapi3d/composite/ComponentVisitor.h"
 
-using namespace cwapi3d::composite;
+using namespace CwAPI3D::Composite;
 
 // ===== Generic Component Tests with int =====
 

@@ -7,7 +7,7 @@
 #include <iomanip>
 #include <numbers>
 
-using namespace cwapi3d::geometry;
+using namespace CwAPI3D::Geometry;
 
 void printOBB(const OBB& obb, const std::string& name) {
     std::cout << "\n" << name << ":\n";

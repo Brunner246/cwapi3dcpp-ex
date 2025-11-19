@@ -4,7 +4,7 @@
 #include "Point3D.h"
 #include "Vec3D.h"
 
-namespace cwapi3d::geometry {
+namespace CwAPI3D::Geometry {
 
 /**
  * @brief Represents a plane in 3D space defined by a point and a normal vector
@@ -34,4 +34,4 @@ private:
     Vec3D mNormal;
 };
 
-} // namespace cwapi3d::geometry
+} // namespace CwAPI3D::Geometry

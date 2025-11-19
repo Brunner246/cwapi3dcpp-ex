@@ -8,7 +8,7 @@
 #include <string>
 #include <vector>
 
-namespace cwapi3d::composite {
+namespace CwAPI3D::Composite {
 
 template <typename T>
 class ComponentVisitorBase;
@@ -215,4 +215,4 @@ class LeafNode final : public ComponentBase<T> {
 #pragma warning(pop)
 #endif
 
-}  // namespace cwapi3d::composite
+}  // namespace CwAPI3D::Composite

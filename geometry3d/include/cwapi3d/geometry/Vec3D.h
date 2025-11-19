@@ -5,7 +5,7 @@
 #include <array>
 #include <cmath>
 
-namespace cwapi3d::geometry {
+namespace CwAPI3D::Geometry {
 
 /**
  * @brief Represents a 3D vector
@@ -64,4 +64,4 @@ class GEOMETRY3D_EXPORT Vec3D {
 
 [[nodiscard]] Vec3D operator*(double scalar, const Vec3D& vec) noexcept;
 
-}  // namespace cwapi3d::geometry
+}  // namespace CwAPI3D::Geometry
