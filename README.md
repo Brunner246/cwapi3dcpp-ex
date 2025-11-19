@@ -202,17 +202,6 @@ Contributions are welcome! Please:
 4. Ensure all tests pass
 5. Submit a pull request
 
-## Design Principles
-
-This project follows clean code and clean architecture principles:
-
-- **SOLID Principles** - Single responsibility, open/closed, dependency inversion
-- **Modern C++** - Uses C++17 features, smart pointers, move semantics
-- **Type Safety** - Strong typing with minimal implicit conversions
-- **Const Correctness** - Proper use of const and noexcept
-- **Memory Safety** - RAII, no raw pointers in public interfaces
-- **Testability** - Designed for unit testing and dependency injection
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
