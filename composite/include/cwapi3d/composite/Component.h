@@ -43,7 +43,6 @@ class ComponentBase {
         return mData.value();
     }
 
-    void setData(T data) { mData = std::move(data); }
     void clearData() { mData.reset(); }
 
     [[nodiscard]] ComponentBase* parent() const noexcept { return mParent; }

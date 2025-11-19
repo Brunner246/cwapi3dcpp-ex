@@ -191,11 +191,6 @@ TEST(GenericComponentTest, DataModification) {
     const auto leaf = std::make_unique<LeafNode<int>>("TestLeaf", 10);
 
     EXPECT_EQ(leaf->data(), 10);
-
-    leaf->setData(20);
-    EXPECT_EQ(leaf->data(), 20);
-    leaf->setData(30);
-    EXPECT_EQ(leaf->data(), 30);
 }
 
 TEST(GenericComponentTest, DataClear) {
@@ -231,9 +226,6 @@ TEST(GenericComponentTest, StringDataType) {
     const auto leaf = std::make_unique<LeafNode<std::string>>("StringLeaf", "Hello, World!");
 
     EXPECT_EQ(leaf->data(), "Hello, World!");
-
-    leaf->setData("Modified");
-    EXPECT_EQ(leaf->data(), "Modified");
 }
 
 TEST(GenericComponentTest, DoubleDataType) {
@@ -267,8 +259,6 @@ TEST(GenericComponentTest, CustomStructDataType) {
     EXPECT_EQ(leaf->data().name, "TestData");
 
     const CustomData newData{100, "NewData"};
-    leaf->setData(newData);
-
     EXPECT_EQ(leaf->data(), newData);
 }
 

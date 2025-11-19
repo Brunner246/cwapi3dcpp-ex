@@ -23,12 +23,12 @@ void example_element_structure() {
     std::cout << "\n=== Example 1: Element Structure Hierarchy ===\n\n";
     
     // Create a building structure using ElementData
-    const auto building = std::make_unique<CompositeNode<ElementData>>("Building");
-    building->setData({1000, "Building", 0.0});
+    const auto building = std::make_unique<CompositeNode<ElementData>>("Building",
+        ElementData{1000, "Building", 0.0});
     
     // Add floors
-    auto floor1 = std::make_unique<CompositeNode<ElementData>>("Floor 1");
-    floor1->setData({1100, "Floor", 0.0});
+    auto floor1 = std::make_unique<CompositeNode<ElementData>>("Floor 1",
+        ElementData{1100, "Floor", 0.0});
     
     // Add beams to floor 1
     auto beam1 = std::make_unique<LeafNode<ElementData>>("Beam 1", 
@@ -51,8 +51,8 @@ void example_element_structure() {
     building->addChild(std::move(floor1));
     
     // Add floor 2
-    auto floor2 = std::make_unique<CompositeNode<ElementData>>("Floor 2");
-    floor2->setData({1200, "Floor", 0.0});
+    auto floor2 = std::make_unique<CompositeNode<ElementData>>("Floor 2",
+        ElementData{1200, "Floor", 0.0});
     
     auto beam3 = std::make_unique<LeafNode<ElementData>>("Beam 3", 
         ElementData{1201, "I-Beam", 5.0});
@@ -211,9 +211,9 @@ void example_data_modification() {
     root->accept(printer);
     
     // Multiply all values by 2
-    root->traverse([](ComponentBase<double>& comp) {
+    root->traverse([](const ComponentBase<double>& comp) {
         if (comp.hasData() && !comp.isComposite()) {
-            comp.setData(comp.data() * 2.0);
+            std::cout << "Multiplied values: " << comp.data() * 2;
         }
     });
     
