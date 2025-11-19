@@ -160,6 +160,7 @@ class CompositeNode final : public ComponentBase<T> {
     using Iterator = std::vector<std::unique_ptr<ComponentBase<T>>>::iterator;
     using ConstIterator = std::vector<std::unique_ptr<ComponentBase<T>>>::const_iterator;
 
+    // Makes composite iterable compiler calls composite.begin() and composite.end()
     [[nodiscard]] Iterator begin() noexcept { return mChildren.begin(); }
     [[nodiscard]] Iterator end() noexcept { return mChildren.end(); }
     [[nodiscard]] ConstIterator begin() const noexcept { return mChildren.begin(); }

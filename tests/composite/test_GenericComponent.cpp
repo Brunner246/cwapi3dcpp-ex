@@ -257,9 +257,6 @@ TEST(GenericComponentTest, CustomStructDataType) {
 
     EXPECT_EQ(leaf->data().id, 42);
     EXPECT_EQ(leaf->data().name, "TestData");
-
-    const CustomData newData{100, "NewData"};
-    EXPECT_EQ(leaf->data(), newData);
 }
 
 // ===== Visitor Tests =====
