@@ -4,10 +4,12 @@
 
 namespace CwAPI3D::Composite {
 
-// Forward declarations for non-generic types
-class Component;
-class Composite;
-class Leaf;
+
+template <typename T>
+class CompositeNode;
+
+template <typename T>
+class LeafNode;
 
 // Template classes are forward declared in Component.h
 // template<typename T> class ComponentBase;
