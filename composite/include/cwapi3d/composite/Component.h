@@ -215,4 +215,17 @@ class LeafNode final : public ComponentBase<T> {
 #pragma warning(pop)
 #endif
 
+// Inline accept implementations for template types to ensure they are
+// instantiated in any translation unit that includes this header.
+
+template <typename T>
+void CompositeNode<T>::accept(const ComponentVisitorBase<T>& visitor) const {
+    visitor.visitComposite(*this);
+}
+
+template <typename T>
+void LeafNode<T>::accept(const ComponentVisitorBase<T>& visitor) const {
+    visitor.visitLeaf(*this);
+}
+
 }  // namespace CwAPI3D::Composite

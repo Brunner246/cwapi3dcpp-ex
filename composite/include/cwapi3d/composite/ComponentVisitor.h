@@ -81,18 +81,3 @@ private:
 
 }  // namespace CwAPI3D::Composite
 
-
-namespace CwAPI3D::Composite {
-
-// Accept method implementations for template classes
-template<typename T>
-void CompositeNode<T>::accept(const ComponentVisitorBase<T>& visitor) const {
-    visitor.visitComposite(*this);
-}
-
-template<typename T>
-void LeafNode<T>::accept(const ComponentVisitorBase<T>& visitor) const {
-    visitor.visitLeaf(*this);
-}
-
-}  // namespace CwAPI3D::Composite
