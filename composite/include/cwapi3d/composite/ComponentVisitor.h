@@ -1,14 +1,6 @@
 #pragma once
 
-#include "cwapi3d/composite/Component.h"
 #include <iostream>
-
-// Forward declare to avoid circular dependency in this section
-namespace CwAPI3D::Composite {
-template<typename T> class ComponentBase;
-template<typename T> class CompositeNode;
-template<typename T> class LeafNode;
-}
 
 namespace CwAPI3D::Composite {
 

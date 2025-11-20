@@ -8,10 +8,10 @@
 #include <string>
 #include <vector>
 
-namespace CwAPI3D::Composite {
 
-template <typename T>
-class ComponentVisitorBase;
+#include "cwapi3d/composite/ComponentVisitor.h"
+
+namespace CwAPI3D::Composite {
 
 /**
  * @brief Abstract base class for all components in the generic composite pattern
