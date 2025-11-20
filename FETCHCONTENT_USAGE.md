@@ -29,12 +29,15 @@ set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)  # Don't build cwapi3dcpp-ex example
 
 FetchContent_MakeAvailable(CwAPI3DEx)
 
-# Now you can link against the libraries
+# Link against the libraries you need
 add_executable(my_app main.cpp)
-target_link_libraries(my_app PRIVATE
-        geometry3d
-        composite
-)
+
+# Option 1: If using both geometry and composite
+# Composite is header-only and already depends on geometry3d, so just link composite
+target_link_libraries(my_app PRIVATE CwAPI3D::composite)
+
+# Option 2: If only using geometry (no composite patterns)
+# target_link_libraries(my_app PRIVATE CwAPI3D::geometry3d)
 ```
 
 ## Using Specific Versions
@@ -104,13 +107,13 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(CwAPI3DEx)
 
-# Link only the geometry3d library
+# Link only the geometry3d library (compiled library)
 add_executable(my_geometry_app main.cpp)
-target_link_libraries(my_geometry_app PRIVATE geometry3d)
+target_link_libraries(my_geometry_app PRIVATE CwAPI3D::geometry3d)
 
-# Or link only the composite library
+# Or link the composite library (header-only, automatically includes geometry3d)
 add_executable(my_composite_app other_main.cpp)
-target_link_libraries(my_composite_app PRIVATE composite)
+target_link_libraries(my_composite_app PRIVATE CwAPI3D::composite)
 ```
 
 ## Complete Example Project
@@ -148,10 +151,8 @@ add_executable(my_app
         src/geometry_processor.cpp
 )
 
-target_link_libraries(my_app PRIVATE
-        geometry3d
-        composite
-)
+# Link composite (header-only, includes geometry3d transitively)
+target_link_libraries(my_app PRIVATE CwAPI3D::composite)
 
 # Your application can now use all headers from cwapi3dcpp.ex
 # #include "cwapi3d/geometry/Point3D.h"
@@ -167,8 +168,8 @@ target_link_libraries(my_app PRIVATE
 #include "cwapi3d/composite/Component.h"
 
 int main() {
-    using namespace cwapi3d::geometry;
-    using namespace cwapi3d::composite;
+    using namespace CwAPI3D::Geometry;
+    using namespace CwAPI3D::Composite;
     
     // Use geometry
     Point3D p1(1.0, 2.0, 3.0);
@@ -185,7 +186,7 @@ int main() {
 }
 ```
 
-## Using with vcpkg Dependencies
+## Using with vcpkg Dependencies 
 
 If your project also uses vcpkg, you can combine FetchContent with vcpkg:
 
@@ -213,7 +214,8 @@ set(BUILD_TESTING OFF CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(CwAPI3DEx)
 
 add_executable(my_app main.cpp)
-target_link_libraries(my_app PRIVATE geometry3d composite)
+# Link composite (includes geometry3d transitively)
+target_link_libraries(my_app PRIVATE CwAPI3D::composite)
 ```
 
 **vcpkg.json:**
@@ -251,11 +253,6 @@ FetchContent_Declare(
 set(BUILD_TESTING OFF CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(CwAPI3DEx)
 ```
-
-### Issue: Namespace collisions
-
-**Solution**: cwapi3dcpp.ex uses proper namespaces (`cwapi3d::geometry`, `cwapi3d::composite`) and exported targets (
-`geometry3d`, `composite`) to avoid conflicts.
 
 ## Alternative: Using find_package (for installed version)
 
