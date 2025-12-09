@@ -8,7 +8,6 @@
 #include <string>
 #include <vector>
 
-
 #include "cwapi3d/composite/ComponentVisitor.h"
 
 namespace CwAPI3D::Composite {
@@ -37,6 +36,13 @@ class ComponentBase {
     // Data accessors
     [[nodiscard]] bool hasData() const noexcept { return mData.has_value(); }
     [[nodiscard]] const T& data() const {
+        if (!mData.has_value()) {
+            throw std::runtime_error("Component has no data");
+        }
+        return mData.value();
+    }
+
+    [[nodiscard]] T& data() {
         if (!mData.has_value()) {
             throw std::runtime_error("Component has no data");
         }

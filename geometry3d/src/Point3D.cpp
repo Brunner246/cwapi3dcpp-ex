@@ -1,4 +1,5 @@
 #include "cwapi3d/geometry/Point3D.h"
+#include "cwapi3d/geometry/Vec3D.h"
 
 #include <cmath>
 #include <limits>
@@ -32,7 +33,15 @@ Point3D Point3D::operator+(const Point3D& other) const noexcept {
             mCoords[2] + other.mCoords[2]};
 }
 
-Point3D Point3D::operator-(const Point3D& other) const noexcept {
+Point3D Point3D::operator+(const Vec3D& vec) const noexcept {
+    return {mCoords[0] + vec.x(), mCoords[1] + vec.y(), mCoords[2] + vec.z()};
+}
+
+Point3D Point3D::operator-(const Vec3D& vec) const noexcept {
+    return {mCoords[0] - vec.x(), mCoords[1] - vec.y(), mCoords[2] - vec.z()};
+}
+
+Vec3D Point3D::operator-(const Point3D& other) const noexcept {
     return {mCoords[0] - other.mCoords[0], mCoords[1] - other.mCoords[1],
             mCoords[2] - other.mCoords[2]};
 }
@@ -62,6 +71,20 @@ Point3D& Point3D::operator-=(const Point3D& other) noexcept {
     return *this;
 }
 
+Point3D& Point3D::operator+=(const Vec3D& vec) noexcept {
+    mCoords[0] += vec.x();
+    mCoords[1] += vec.y();
+    mCoords[2] += vec.z();
+    return *this;
+}
+
+Point3D& Point3D::operator-=(const Vec3D& vec) noexcept {
+    mCoords[0] -= vec.x();
+    mCoords[1] -= vec.y();
+    mCoords[2] -= vec.z();
+    return *this;
+}
+
 Point3D& Point3D::operator*=(const double scalar) noexcept {
     mCoords[0] *= scalar;
     mCoords[1] *= scalar;
@@ -80,5 +103,7 @@ Point3D& Point3D::operator/=(const double scalar) {
 }
 
 Point3D operator*(const double scalar, const Point3D& point) noexcept { return point * scalar; }
+
+Point3D operator+(const Vec3D& vec, const Point3D& point) noexcept { return point + vec; }
 
 }  // namespace CwAPI3D::Geometry

@@ -46,6 +46,31 @@ int main() {
     const double dot = v1.dot(v2);
     std::cout << "Dot product: " << dot << "\n\n";
     
+    // Example 1a: Point-Vector Arithmetic (Translation)
+    std::cout << "1a. Point-Vector Arithmetic (Translation)\n";
+    std::cout << "------------------------------------------\n";
+
+    const Point3D lStartPoint(10.0, 20.0, 30.0);
+    const Vec3D lDirection = Vec3D::unitX();
+    const double lDistance = 500.0;
+
+    // Move point by scaled vector: p1 + x * 500
+    const Point3D lMovedPoint = lStartPoint + lDirection * lDistance;
+
+    printPoint("Start point", lStartPoint);
+    printVec("Direction vector", lDirection);
+    std::cout << "Distance: " << lDistance << "\n";
+    printPoint("Moved point (p + v * 500)", lMovedPoint);
+
+    // Also works with commutative form: 500 * x + p1
+    const Point3D lMovedPoint2 = lDistance * lDirection + lStartPoint;
+    printPoint("Same result (500 * v + p)", lMovedPoint2);
+
+    // Displacement between two points gives a vector
+    const Vec3D lDisplacement = lMovedPoint - lStartPoint;
+    printVec("Displacement vector", lDisplacement);
+    std::cout << "Displacement length: " << lDisplacement.length() << "\n\n";
+
     // Example 2: Plane Operations
     std::cout << "2. Plane Operations\n";
     std::cout << "-------------------\n";

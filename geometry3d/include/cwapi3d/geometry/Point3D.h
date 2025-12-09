@@ -6,6 +6,9 @@
 
 namespace CwAPI3D::Geometry {
 
+            // Forward declaration
+class Vec3D;
+
 /**
  * @brief Represents a point in 3D space
  */
@@ -34,9 +37,8 @@ public:
     [[nodiscard]] double distanceTo(const Point3D& other) const noexcept;
     [[nodiscard]] double distanceSquaredTo(const Point3D& other) const noexcept;
 
-    // Arithmetic operations
+    // Arithmetic operations (Point with Point - kept for compatibility but semantically unclear)
     [[nodiscard]] Point3D operator+(const Point3D& other) const noexcept;
-    [[nodiscard]] Point3D operator-(const Point3D& other) const noexcept;
     [[nodiscard]] Point3D operator*(double scalar) const noexcept;
     [[nodiscard]] Point3D operator/(double scalar) const;
 
@@ -45,10 +47,19 @@ public:
     Point3D& operator*=(double scalar) noexcept;
     Point3D& operator/=(double scalar);
 
+    // Vector arithmetic operations (semantically correct point-vector operations)
+    [[nodiscard]] Point3D operator+(const Vec3D& vec) const noexcept;
+    [[nodiscard]] Point3D operator-(const Vec3D& vec) const noexcept;
+    [[nodiscard]] Vec3D operator-(const Point3D& other) const noexcept;  // Displacement vector
+
+    Point3D& operator+=(const Vec3D& vec) noexcept;
+    Point3D& operator-=(const Vec3D& vec) noexcept;
+
 private:
     std::array<double, 3> mCoords;
 };
 
 [[nodiscard]] Point3D operator*(double scalar, const Point3D& point) noexcept;
+[[nodiscard]] Point3D operator+(const Vec3D& vec, const Point3D& point) noexcept;
 
 } // namespace CwAPI3D::Geometry
