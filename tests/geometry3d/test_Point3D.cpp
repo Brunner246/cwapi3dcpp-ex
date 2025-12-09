@@ -1,5 +1,7 @@
 #include <gtest/gtest.h>
+
 #include "cwapi3d/geometry/Point3D.h"
+#include "cwapi3d/geometry/Vec3D.h"
 
 using namespace CwAPI3D::Geometry;
 
@@ -47,7 +49,8 @@ TEST(Point3DTest, Subtraction) {
     const Point3D p1(1.0, 2.0, 3.0);
     const Point3D p2(4.0, 5.0, 6.0);
 
-    const Point3D diff = p2 - p1;
+    const auto lVec3D = p2 - p1;
+    const auto diff = Point3D(lVec3D.x(), lVec3D.y(), lVec3D.z());
     EXPECT_DOUBLE_EQ(diff.x(), 3.0);
     EXPECT_DOUBLE_EQ(diff.y(), 3.0);
     EXPECT_DOUBLE_EQ(diff.z(), 3.0);
@@ -86,7 +89,7 @@ TEST(Point3DTest, Equality) {
     const Point3D p1(1.0, 2.0, 3.0);
     const Point3D p2(1.0, 2.0, 3.0);
     const Point3D p3(1.0, 2.0, 3.1);
-    
+
     EXPECT_TRUE(p1 == p2);
     EXPECT_FALSE(p1 == p3);
 }
