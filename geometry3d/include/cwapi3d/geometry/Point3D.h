@@ -6,7 +6,7 @@
 
 namespace CwAPI3D::Geometry {
 
-            // Forward declaration
+// Forward declaration
 class Vec3D;
 
 /**
@@ -59,7 +59,7 @@ private:
     std::array<double, 3> mCoords;
 };
 
-[[nodiscard]] Point3D operator*(double scalar, const Point3D& point) noexcept;
-[[nodiscard]] Point3D operator+(const Vec3D& vec, const Point3D& point) noexcept;
+[[nodiscard]] GEOMETRY3D_EXPORT Point3D operator*(double scalar, const Point3D& point) noexcept;
+[[nodiscard]] GEOMETRY3D_EXPORT Point3D operator+(const Vec3D& vec, const Point3D& point) noexcept;
 
 } // namespace CwAPI3D::Geometry

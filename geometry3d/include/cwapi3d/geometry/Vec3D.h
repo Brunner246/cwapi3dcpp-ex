@@ -62,6 +62,6 @@ class GEOMETRY3D_EXPORT Vec3D {
     std::array<double, 3> mComponents;
 };
 
-[[nodiscard]] Vec3D operator*(double scalar, const Vec3D& vec) noexcept;
+[[nodiscard]] GEOMETRY3D_EXPORT Vec3D operator*(double scalar, const Vec3D& vec) noexcept;
 
 }  // namespace CwAPI3D::Geometry
