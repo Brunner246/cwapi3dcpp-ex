@@ -1,13 +1,14 @@
 #include "cwapi3d/geometry/Point3D.h"
-#include "cwapi3d/geometry/Vec3D.h"
 
 #include <cmath>
 #include <limits>
 #include <stdexcept>
 
+#include "cwapi3d/geometry/Vec3D.h"
+
 namespace CwAPI3D::Geometry {
 
-constexpr double EPSILON =  1e-6; // std::numeric_limits<double>::epsilon() * 100;
+constexpr double EPSILON = 1e-6;  // std::numeric_limits<double>::epsilon() * 100;
 
 bool Point3D::operator==(const Point3D& other) const noexcept {
     return std::abs(mCoords[0] - other.mCoords[0]) < EPSILON &&
@@ -105,5 +106,9 @@ Point3D& Point3D::operator/=(const double scalar) {
 Point3D operator*(const double scalar, const Point3D& point) noexcept { return point * scalar; }
 
 Point3D operator+(const Vec3D& vec, const Point3D& point) noexcept { return point + vec; }
+
+Point3D operator-(const Point3D& lhs, const Point3D& rhs) noexcept {
+    return {lhs.x() - rhs.x(), lhs.y() - rhs.y(), lhs.z() - rhs.z()};
+}
 
 }  // namespace CwAPI3D::Geometry
