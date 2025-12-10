@@ -61,7 +61,5 @@ private:
 
 [[nodiscard]] GEOMETRY3D_EXPORT Point3D operator*(double scalar, const Point3D& point) noexcept;
 [[nodiscard]] GEOMETRY3D_EXPORT Point3D operator+(const Vec3D& vec, const Point3D& point) noexcept;
-[[nodiscard]] GEOMETRY3D_EXPORT Point3D operator-(const Point3D& lhs, const Point3D& rhs) noexcept;
-
 
 } // namespace CwAPI3D::Geometry
