@@ -1,29 +1,42 @@
 #pragma once
 
-#include <codecvt>
-#include <locale>
+#include <windows.h>
+
 #include <string>
 #include <string_view>
 
 namespace CwAPI3D::Utility {
 
-/// Convert cwapi3d w_string to UTF-8 std::string
 inline std::string ToUtf8(const std::wstring& value) {
-    std::wstring wide(value.c_str());
-    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> conv;
-    return conv.to_bytes(wide);
+    if (value.empty()) return {};
+
+    // Ask Windows how many bytes we need
+    // CP_UTF8 tells Windows to treat the source as UTF-8
+    const int size_needed = WideCharToMultiByte(CP_UTF8, 0, value.data(), static_cast<int>(value.size()), nullptr, 0,
+                                          nullptr, nullptr);
+
+    std::string result(size_needed, 0);
+
+    WideCharToMultiByte(CP_UTF8, 0, value.data(), static_cast<int>(value.size()), &result[0], size_needed,
+                        nullptr, nullptr);
+
+    return result;
 }
 
-/// Convert UTF-8 std::string_view to cwapi3d w_string
-inline std::wstring ToWString(std::string_view utf8) {
-    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> conv;
-    std::wstring wide = conv.from_bytes(utf8.data(), utf8.data() + utf8.size());
-    return std::wstring(wide.c_str());
+inline std::wstring ToWString(const std::string_view utf8) {
+    if (utf8.empty()) return {};
+
+    // Ask Windows how many wide characters we need
+    const int size_needed = MultiByteToWideChar(CP_UTF8, 0, utf8.data(), static_cast<int>(utf8.size()), nullptr, 0);
+
+    std::wstring result(size_needed, 0);
+
+    MultiByteToWideChar(CP_UTF8, 0, utf8.data(), static_cast<int>(utf8.size()), &result[0], size_needed);
+
+    return result;
 }
 
-inline std::wstring ToWString(const std::string& utf8) {
-    return ToWString(std::string_view(utf8));
-}
+inline std::wstring ToWString(const std::string& utf8) { return ToWString(std::string_view(utf8)); }
 
 inline std::wstring ToWString(const char* utf8) {
     return utf8 ? ToWString(std::string_view(utf8)) : std::wstring();
