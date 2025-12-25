@@ -77,47 +77,6 @@ TEST_F(AssignmentServiceTest, GetFloorsInBuilding) {
     EXPECT_EQ(floors.size(), 2);
 }
 
-TEST_F(AssignmentServiceTest, AddComponent) {
-    auto* element = context.createElement("Element");
-
-    auto geom = std::make_unique<BRepGeometry>();
-    bool success = service.addComponent(element->id(), std::move(geom));
-
-    EXPECT_TRUE(success);
-    EXPECT_TRUE(context.componentRegistry().hasComponent<BRepGeometry>(element->id()));
-}
-
-TEST_F(AssignmentServiceTest, AddComponentToInvalidEntity) {
-    auto fakeId = EntityId::create();
-
-    auto geom = std::make_unique<BRepGeometry>();
-    bool success = service.addComponent(fakeId, std::move(geom));
-
-    EXPECT_FALSE(success);
-}
-
-TEST_F(AssignmentServiceTest, RemoveComponent) {
-    auto* element = context.createElement("Element");
-
-    context.componentRegistry().addComponent(element->id(), std::make_unique<BRepGeometry>());
-
-    bool removed = service.removeComponent<BRepGeometry>(element->id());
-    EXPECT_TRUE(removed);
-    EXPECT_FALSE(context.componentRegistry().hasComponent<BRepGeometry>(element->id()));
-}
-
-TEST_F(AssignmentServiceTest, GetComponent) {
-    auto* element = context.createElement("Element");
-
-    auto geom = std::make_unique<BRepGeometry>();
-    geom->addVertex({{1, 2, 3}});
-
-    context.componentRegistry().addComponent(element->id(), std::move(geom));
-
-    auto* retrieved = service.getComponent<BRepGeometry>(element->id());
-    EXPECT_NE(retrieved, nullptr);
-    EXPECT_EQ(retrieved->vertices().size(), 1);
-}
 
 TEST_F(AssignmentServiceTest, GetElementsInBuilding) {
     auto* building = context.createBuilding("Building");

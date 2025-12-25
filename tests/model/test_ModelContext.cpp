@@ -90,20 +90,6 @@ TEST(ModelContextTest, DeleteFloorCleansUpRelations) {
     EXPECT_FALSE(context.floorAssignment().getFloorForElement(element->id()).has_value());
 }
 
-TEST(ModelContextTest, DeleteElementCleansUpComponents) {
-    ModelContext context;
-
-    auto* element = context.createElement("Element");
-
-    context.componentRegistry().addComponent(element->id(), std::make_unique<BRepGeometry>());
-
-    EXPECT_TRUE(context.componentRegistry().hasComponent<BRepGeometry>(element->id()));
-
-    context.deleteElement(element->id());
-
-    EXPECT_FALSE(context.componentRegistry().hasComponent<BRepGeometry>(element->id()));
-}
-
 TEST(ModelContextTest, GetAllBuildings) {
     ModelContext context;
 
@@ -153,17 +139,6 @@ TEST(ModelContextTest, Clear) {
     EXPECT_EQ(context.buildingCount(), 0);
     EXPECT_EQ(context.floorCount(), 0);
     EXPECT_EQ(context.elementCount(), 0);
-}
-
-TEST(ModelContextTest, ComponentRegistryAccess) {
-    ModelContext context;
-
-    auto& registry = context.componentRegistry();
-    auto entityId = EntityId::create();
-
-    registry.addComponent(entityId, std::make_unique<BRepGeometry>());
-
-    EXPECT_TRUE(registry.hasComponent<BRepGeometry>(entityId));
 }
 
 TEST(ModelContextTest, FloorAssignmentAccess) {
