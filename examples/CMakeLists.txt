@@ -10,5 +10,8 @@ target_link_libraries(kdtree_example PRIVATE geometry3d)
 add_executable(obb_example obb_example.cpp)
 target_link_libraries(obb_example PRIVATE geometry3d)
 
+add_executable(model_example model_example.cpp)
+target_link_libraries(model_example PRIVATE CwAPI3D::Model)
+
 
 

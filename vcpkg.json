@@ -1,13 +1,15 @@
 {
-  "name" : "cwapi3dcpp-ex",
-  "version-string" : "0.1.0",
-  "description" : "Extension library for CwAPI3D providing geometry and composite object structures",
-  "homepage" : "https://github.com/cwapi3d/cwapi3dcpp-ex",
-  "license" : "MIT",
-  "supports" : "!(uwp)",
-  "builtin-baseline" : "d1ff36c6520ee43f1a656c03cd6425c2974a449e",
-  "dependencies" : [ {
-    "name" : "gtest",
-    "version>=" : "1.16.0"
-  } ]
+  "name": "cwapi3dcpp-ex",
+  "version-string": "0.1.0",
+  "description": "Extension library for CwAPI3D providing geometry and composite object structures",
+  "homepage": "https://github.com/cwapi3d/cwapi3dcpp-ex",
+  "license": "MIT",
+  "supports": "!(uwp)",
+  "builtin-baseline": "d1ff36c6520ee43f1a656c03cd6425c2974a449e",
+  "dependencies": [
+    {
+      "name": "gtest",
+      "version>=": "1.16.0"
+    }
+  ]
 }
