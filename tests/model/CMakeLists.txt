@@ -5,8 +5,10 @@ add_executable(test_model
         test_DomainEntities.cpp
         test_ComponentRegistry.cpp
         test_FloorAssignment.cpp
+        test_ElementAssignment.cpp
         test_ModelContext.cpp
         test_AssignmentService.cpp
+        test_ElementHierarchy.cpp
 )
 
 target_link_libraries(test_model

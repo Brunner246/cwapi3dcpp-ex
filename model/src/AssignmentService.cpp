@@ -131,4 +131,70 @@ bool AssignmentService::entityExists(const EntityId& entityId) const {
            mContext.getBuilding(entityId);
 }
 
+// ========== Element Hierarchy (Recursive Aggregation) ==========
+
+bool AssignmentService::assignElementToParent(const EntityId& childId,
+                                               const EntityId& parentId) const {
+    // Validate entities exist
+    if (!mContext.getElement(childId) || !mContext.getElement(parentId)) {
+        return false;
+    }
+
+    mContext.elementAssignment().assignElementToParent(childId, parentId);
+    return true;
+}
+
+bool AssignmentService::removeElementFromParent(const EntityId& childId) const {
+    return mContext.elementAssignment().removeElementFromParent(childId);
+}
+
+std::vector<Element*> AssignmentService::getChildElements(const EntityId& parentId) const {
+    const auto childIds = mContext.elementAssignment().getChildElements(parentId);
+
+    std::vector<Element*> result;
+    result.reserve(childIds.size());
+
+    for (const auto& id : childIds) {
+        if (auto* element = mContext.getElement(id)) {
+            result.push_back(element);
+        }
+    }
+
+    return result;
+}
+
+Element* AssignmentService::getParentElement(const EntityId& childId) const {
+    const auto parentId = mContext.elementAssignment().getParentForElement(childId);
+    if (!parentId) {
+        return nullptr;
+    }
+
+    return mContext.getElement(*parentId);
+}
+
+std::vector<Element*> AssignmentService::getAllElementsRecursive(const EntityId& rootId) const {
+    std::vector<Element*> result;
+    
+    // Add the root element itself
+    if (auto* root = mContext.getElement(rootId)) {
+        result.push_back(root);
+        collectElementsRecursive(rootId, result);
+    }
+
+    return result;
+}
+
+void AssignmentService::collectElementsRecursive(const EntityId& elementId,
+                                                  std::vector<Element*>& result) const {
+    const auto childIds = mContext.elementAssignment().getChildElements(elementId);
+
+    for (const auto& childId : childIds) {
+        if (auto* child = mContext.getElement(childId)) {
+            result.push_back(child);
+            // Recursively collect children's children
+            collectElementsRecursive(childId, result);
+        }
+    }
+}
+
 }  // namespace CwAPI3D::Model

@@ -24,6 +24,7 @@ target_sources(${PROJECT_NAME}
         src/ComponentRegistry.cpp
         src/BuildingStoreyAssignment.cpp
         src/BuildingAssignment.cpp
+        src/ElementAssignment.cpp
         src/ModelContext.cpp
         src/AssignmentService.cpp
 

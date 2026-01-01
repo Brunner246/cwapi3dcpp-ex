@@ -111,6 +111,8 @@ bool ModelContext::deleteElement(const EntityId& id) {
 
     // Clean up relations and components
     mFloorAssignment.removeElementFromFloor(id);
+    mElementAssignment.removeElementFromParent(id);  // Remove as child
+    mElementAssignment.removeParentElement(id);      // Remove as parent (all children)
     mComponentRegistry.removeAllComponents(id);
 
     mElements.erase(it);
@@ -125,6 +127,7 @@ void ModelContext::clear() {
     mElements.clear();
     mFloorAssignment.clear();
     mBuildingAssignment.clear();
+    mElementAssignment.clear();
 }
 
 }  // namespace CwAPI3D::Model

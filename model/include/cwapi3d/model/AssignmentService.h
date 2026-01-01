@@ -131,8 +131,51 @@ class CWAPI3D_MODEL_EXPORT AssignmentService {
      */
     [[nodiscard]] std::vector<BuildingBucket> getHierarchy() const;
 
+    // ========== Element Hierarchy (Recursive Aggregation) ==========
+
+    /**
+     * @brief Assign a child element to a parent element
+     * 
+     * This enables recursive aggregation where elements can contain sub-elements.
+     * For example: A Wall (parent) containing Posts and Plates (children).
+     * 
+     * Validates that both entities exist before performing the assignment.
+     * Returns true if successful, false if validation fails.
+     */
+    [[nodiscard]] bool assignElementToParent(const EntityId& childId, const EntityId& parentId) const;
+
+    /**
+     * @brief Remove a child element from its parent element
+     */
+    [[nodiscard]] bool removeElementFromParent(const EntityId& childId) const;
+
+    /**
+     * @brief Get all child elements for a parent element
+     * 
+     * Returns actual Element pointers, not just IDs.
+     */
+    [[nodiscard]] std::vector<Element*> getChildElements(const EntityId& parentId) const;
+
+    /**
+     * @brief Get the parent element for a child element
+     */
+    [[nodiscard]] Element* getParentElement(const EntityId& childId) const;
+
+    /**
+     * @brief Get all elements recursively (including nested children)
+     * 
+     * Performs a depth-first traversal of the element hierarchy starting from the given element.
+     * Useful for operations that need to process an entire element subtree.
+     */
+    [[nodiscard]] std::vector<Element*> getAllElementsRecursive(const EntityId& rootId) const;
+
    private:
     [[nodiscard]] bool entityExists(const EntityId& entityId) const;
+
+    /**
+     * @brief Helper for recursive element traversal
+     */
+    void collectElementsRecursive(const EntityId& elementId, std::vector<Element*>& result) const;
 
     ModelContext& mContext;
 };

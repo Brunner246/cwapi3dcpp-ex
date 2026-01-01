@@ -19,6 +19,7 @@ class CWAPI3D_MODEL_EXPORT ModelEntity {
    public:
     explicit ModelEntity(std::string name, std::optional<std::string> description = std::nullopt)
         : mId(EntityId::create()), mName(std::move(name)), mDescription(std::move(description)) {}
+
     virtual ~ModelEntity() = default;
 
     [[nodiscard]] const EntityId& id() const noexcept { return mId; }

@@ -10,6 +10,7 @@
 #include "cwapi3d/model/BuildingStoreyAssignment.h"
 #include "cwapi3d/model/ComponentRegistry.h"
 #include "cwapi3d/model/Element.h"
+#include "cwapi3d/model/ElementAssignment.h"
 #include "cwapi3d/model/EntityId.h"
 #include "cwapi3d/model/cwapi3d_model_export.h"
 
@@ -104,6 +105,13 @@ class CWAPI3D_MODEL_EXPORT ModelContext {
         return mBuildingAssignment;
     }
 
+    [[nodiscard]] ElementAssignment& elementAssignment() noexcept {
+        return mElementAssignment;
+    }
+    [[nodiscard]] const ElementAssignment& elementAssignment() const noexcept {
+        return mElementAssignment;
+    }
+
     // ========== Statistics ==========
 
     [[nodiscard]] size_t buildingCount() const noexcept { return mBuildings.size(); }
@@ -125,6 +133,7 @@ class CWAPI3D_MODEL_EXPORT ModelContext {
     ComponentRegistry mComponentRegistry;
     BuildingStoreyAssignment mFloorAssignment;
     BuildingAssignment mBuildingAssignment;
+    ElementAssignment mElementAssignment;
 };
 
 }  // namespace CwAPI3D::Model
